@@ -89,4 +89,37 @@ declare module 'mock-socket' {
     verifyClient?: () => boolean;
     selectProtocol?: (protocols: string[]) => string | null;
   }
+
+  class SocketIO extends EventTarget {
+    constructor(url?: string, protocol?: string);
+
+    static readonly CONNECTING: 0;
+    static readonly OPEN: 1;
+    static readonly CLOSING: 2;
+    static readonly CLOSED: 3;
+
+    broadcast: BroadcastReturnObject;
+
+    close(): SocketIO | undefined;
+    disconnect(): SocketIO | undefined;
+    emit(event: string, ...data: object[]): SocketIO;
+    send(data: string | Blob | ArrayBuffer | ArrayBufferView): SocketIO;
+    on(type: string, callback: () => void): SocketIO;
+    off(type: string): void;
+    join(room: string): void;
+    leave(room: string): void;
+    to(room: string): SocketIO;
+    in(): void;
+    dispatchEvent(event: Event, ...customArgument: object[]): boolean | undefined;
+  }
+
+  interface BroadcastReturnObject {
+    emit(event: string, data: object): SocketIO;
+    to(room: string): SocketIO;
+    in(room: string): SocketIO;
+  }
+
+  interface Event {
+    type: string,
+  }
 }
