@@ -2,6 +2,7 @@
 // Project: Mock Socket
 // Definitions by: Travis Hoover <https://github.com/thoov/mock-socket>
 
+/// <reference lib="dom" />
 declare module 'mock-socket' {
   class EventTarget {
     listeners: any;
