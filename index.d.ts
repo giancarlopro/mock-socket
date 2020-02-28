@@ -7,7 +7,7 @@ declare module 'mock-socket' {
   class EventTarget {
     listeners: any;
     addEventListener(type: string, listener: EventListenerOrEventListenerObject | null, options?: boolean | AddEventListenerOptions): void;
-    dispatchEvent(evt: Event): boolean;
+    dispatchEvent(evt: Event, ...customArguments: object[]): boolean;
     removeEventListener(type: string, listener?: EventListenerOrEventListenerObject | null, options?: EventListenerOptions | boolean): void;
   }
 
@@ -111,7 +111,6 @@ declare module 'mock-socket' {
     leave(room: string): void;
     to(room: string): SocketIO;
     in(): void;
-    dispatchEvent(event: Event, ...customArgument: object[]): boolean | undefined;
   }
 
   interface BroadcastReturnObject {
@@ -122,5 +121,16 @@ declare module 'mock-socket' {
 
   interface Event {
     type: string,
+    timestamp: Date,
+    target: object;
+    srcElement: object;
+    returnValue: boolean;
+    isTrusted: boolean;
+    eventPhase: number;
+    defaultPrevented: boolean;
+    currentTarget: object;
+    cancelable: boolean;
+    canncelBubble: boolean;
+    bubbles: boolean;
   }
 }
